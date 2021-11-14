@@ -1,0 +1,634 @@
+@import 'mixins';
+@import 'common';
+
+// for (let index = 0; index < lis.length; index++) {
+//   lis[index].style.backgroundPosition = `-${index%4*62}px -${Math.floor(index/4)*69}px`;
+// }
+// 给快速通道模块各个a调整合适的背景位置
+@for $i from 0 to 12 {
+  .ft-cn#{$i} {
+    background-position-x: -($i%4)*63px;
+    $j: floor($i/4);
+    background-position-y: -$j*69px;
+  }
+}
+// 给今日推荐模块添加背景颜色
+$bg-colors:
+  '1' #00a0e8,
+  '2' #5fb200,
+  '3' #e2162f,
+  '4' #0085fb;
+@each $i,$color in $bg-colors {
+  .gds#{$i} {
+    background-color: $color;
+  }
+}
+
+// 给footer头部添加背景图片位置
+@for $i from 1 to 6 {
+  .ft-icon#{$i} {
+    @if $i < 4 {
+      background-position-x: -251px-$i*2px;
+    }
+    @else {
+      background-position-x: -258px;
+    }
+    @if $i == 1 {
+      background-position-y: -3px;
+    }
+    @else if $i == 2 {
+      background-position-y: -54px;
+    }
+    @else if $i == 3 {
+      background-position-y: -106px;
+    }
+    @else if $i == 4 {
+      background-position-y: -157px;
+    }
+    @else{
+      background-position-y: -209px;
+    }
+  }
+}
+
+
+body {
+  font-size: 12px;
+  color: $style-666;
+  // 页面顶部导航.top
+  .top {
+    height: 31px;
+    line-height: 31px;
+    background-color: $style-bg-f1;
+    nav {
+      @extend .container;
+      p {
+        float: left;
+      }
+      ul {
+        display: flex;
+        float: right;
+        li {
+          position: relative;
+          padding: 0 6px;
+          .icon {
+            margin-right: 18px;
+            i {
+              position: absolute;
+              height: 12px;
+              top: 1px;
+              right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  // 主导航头部区域main-nav-header
+  .main-nav-header {
+    background-color: #fff;
+    .container {
+      display: flex;
+      height: 105px;
+      padding-top: 25px;
+      // logo模块
+      h1 {
+        a {
+          display: block;
+        }
+      }
+      // 搜索模块
+      .search {
+        margin-left: 172px;
+        .input-search {
+          display: flex;
+          width: 537px;
+          height: 35px;
+          border: 2px solid $style-deepred;
+          input {
+            width: 454px;
+            height: 31px;
+            line-height: 31px;
+            text-indent: 2em;
+            outline: none;
+          }
+          button {
+            width: 80px;
+            height: 31px;
+            line-height: 31px;
+            color: #fff;
+            background-color: $style-deepred;
+            border: none;
+          }
+        }
+        .list-search {
+          ul {
+            display: flex;
+            padding-top: 7px;
+            padding-left: 12px;
+            li {
+              padding-right: 27px;
+            }
+          }
+        }
+      }
+      // 购物车模块
+      .shopping-cart {
+        position: relative;
+        margin-left: 111px;
+        width: 140px;
+        height: 36px;
+        line-height: 36px;
+        border: 1px solid #dfdfdf;
+        background-color: #f7f7f7;
+        text-align: center;
+        span {
+          position: absolute;
+          width: 14px;
+          height: 16px;
+          top: -5px;
+          right: 28px;
+          line-height: 16px;
+          border-radius: 50%;
+          border-bottom-left-radius: 0;
+          color: #fff;
+          background-color: #e60012;
+        }
+        .icon-arrow-right {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  // 主内容区main-content
+  .main-content {
+    // 主内容头部
+    .main-content-hd {
+      height: 47px;
+      border-bottom: 2px solid $style-deepred;
+      .container {
+        display: flex;
+        line-height: 45px;
+        font-size: 16px;
+        text-align: center;
+        .goods-category {
+          width: 209px;
+          height: 45px;
+          color: #fff;
+          background-color: $style-deepred;
+        }
+        .navitems {
+          ul {
+            display: flex;
+            & li:nth-child(1) {
+              margin-left: 20px;
+              a {
+                color: $style-red;
+              }
+            }
+            a {
+              padding: 0 20px;
+              color: $style-333;
+              &:hover {
+                color: $style-red;
+              }
+            }
+          }
+        }
+      }
+    }
+    // 主内容主体
+    .main-content-bd {
+      .container {
+        display: flex;
+        // 商品分类列表
+        .category-list {
+          width: 209px;
+          height: 465px;
+          background-color: $style-red;
+          li {
+            position: relative;
+            height: 31px;
+            border-left: 1px solid transparent;
+            line-height: 31px;
+            font-size: 14px;
+            text-align: left;
+            text-indent: 1em;
+            color: #fff;
+            & a {
+              color: #fff;
+            }
+            &:hover {
+              background-color: #fff;
+              color: #c81623;
+              a {
+                background-color: #fff;
+                color: #c81623;
+                i {
+                  position: absolute;
+                  right: 5px;
+                }
+              }
+            }
+          }
+        }
+        // 轮播图模块
+        .viewpager {
+          margin: 10px 0 0 10px;
+        }
+        // 多功能区
+        .ultifcl-area {
+          width: 253px;
+          height: 455px;
+          margin-top: 10px;
+          margin-left: 6px;
+          // 新闻快报模块
+          .news-flash {
+            width: 100%;
+            height: 165px;
+            padding: 0 15px;
+            border: 1px solid #e4e4e4;
+            .news-title {
+              position: relative;
+              display: flex;
+              justify-content: space-between;
+              height: 33px;
+              line-height: 33px;
+              border-bottom: 1px dotted #e4e4e4;
+              font-size: 14px;
+              color: $style-333;
+            }
+            .news-bd {
+              li {
+                height: 26px;
+                line-height: 26px;
+                strong {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+          // 快速通道模块
+          .fast-channel {
+            border-left: 1px solid #e4e4e4;
+            ul {
+              display: flex;
+              flex-wrap: wrap;
+              li {
+                width: 63px;
+                height: 70px;
+                border-right: 1px solid #e4e4e4;
+                border-bottom: 1px solid #e4e4e4;
+                a {
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  padding-top: 50px;
+                  text-align: center;
+                  background-image: url(../img/index/icons.png);
+                  background-color: #fff;
+                }
+              }
+            }
+          }
+          .banner-img {
+            img {
+              width: 100%;
+              height: auto;
+              margin-top: 4px;
+            }
+          }
+        }
+      }
+    }
+    // 主内容底部
+    .main-content-bt {
+      .container {
+        display: flex;
+        height: 163px;
+        margin-top: 11px;
+        // 今日推荐模块
+        .today {
+          width: 208px;
+          padding-left: 2px;
+          background-color: #5c5251;
+        }
+        // 商品goods模块
+        .today-goods {
+          background-color: $style-bg-eb;
+          ul {
+            display: flex;
+            padding: 10px 0;
+            li {
+              position: relative;
+              width: 248px;
+              height: 143px;
+              border-right: 1px solid $style-bg-dd;
+              &:last-child {
+                border: none;
+              }
+              .goods-title {
+                width: 110px;
+                padding-top: 8px;
+                line-height: 1.5;
+                text-align: center;
+                h3 {
+                  font-size: 16px;
+                  color: $style-333;
+                }
+                .discounts {
+                  margin: 1em;
+                  margin-bottom: 0;
+                  font-size: 14px;
+                  color: #fff;
+                }
+                .buy-methods {
+                  width: 57px;
+                  height: 18px;
+                  margin-top: 0.7rem;
+                  margin-left: 0.7rem;
+                  border-radius: 9px 9px;
+                  font-size: 14px;
+                  line-height: 18px;
+                  color: #fff;
+                }
+              }
+              .goods-img {
+                position: absolute;
+                top: 16px;
+                right: 36px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // 猜你喜欢模块
+  .likes {
+        margin-top: 30px;
+        .container {
+          .likes-top {
+            display: flex;
+            justify-content: space-between;
+            height: 30px;
+            h3 {
+              font-size: 18px;
+              font-weight: normal;
+              color: $style-333;
+            }
+            p {
+              i {
+                margin-left: 5px;
+                font-size: 16px;
+              }
+            }
+          }
+          .likes-list {
+            height: 232px;
+            padding: 0 2px;
+            border: 1px solid $style-bg-ed;
+            ul {
+              display: flex;
+              li {
+                width: 199px;
+                &:last-child {
+                  .describe {
+                    border: none;
+                  }
+                }
+                .likes-img {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  height: 160px;
+                }
+                .describe {
+                  margin-left: 30px;
+                  padding-right: 32px;
+                  border-right: 1px solid $style-bg-ed;
+                  p {
+                    line-height: 18px;
+                  }
+                  p.style-red {
+                    height: 31px;
+                    font-weight: bold;
+                    .price {
+                      font-size: 21px;
+                      line-height: 31px;
+                      color: #df3033;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+  }
+  // floor区域
+  .floor {
+    margin-top: 30px;
+    // 楼层快捷导航区
+    .floor-nav {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      margin-left: -680px;
+      ul {
+        li {
+          width: 70px;
+          height: 32px;
+          line-height: 32px;
+          font-size: 14px;
+          text-align: center;
+          color: #fff;
+          border-bottom: 1px solid #ccc;
+          &:first-child {
+            background-color: $style-red;
+            a {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+    // 楼层主内容区
+    .floor-content {
+      // 主内容区头部
+      .box-hd {
+        display: flex;
+        justify-content: space-between;
+        height: 32px;
+        border-bottom: 2px solid $style-red;
+        h3 {
+          font-size: 18px;
+          line-height: 18px;
+          color: $style-deepred;
+        }
+        .tab-list {
+          display: flex;
+          line-height: 31px;
+          text-indent: 1em;
+          a {
+            margin-right: 10px;
+          }
+        }
+      }
+      .box-bd {
+        display: flex;
+        height: 360px;
+        .tab-content-list {
+          border-bottom: 1px solid #ccc;
+        }
+        .w209 {
+          width: 209px;
+          background-color: rgb(249, 249, 249);
+          text-align: center;
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100px;
+            li {
+              width: 88px;
+              height: 33px;
+              line-height: 33px;
+              margin-left: 12px;
+              border-bottom: 1px solid #ccc;
+            }
+          }
+          div {
+            display: flex;
+            height: 260px;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .w329 {
+          width: 329px;
+          a {
+            display: flex;
+          }
+        }
+        .w220 {
+          width: 220px;
+          border-right: 1px solid #ccc;
+          border-bottom: 1px solid #ccc;
+          a {
+            display: flex;
+          }
+        }
+        .w221 {
+          width: 221px;
+          border-right: 1px solid #ccc;
+          border-bottom: 1px solid #ccc;
+          a {
+            display: flex;
+          }
+        }
+      }
+      .box-ft {
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  // footer区域
+  .footer {
+    background-color: #F5F5F5;
+    .container {
+      .ft-hd {
+        ul {
+          display: flex;
+          height: 110px;
+          li {
+            display: flex;
+            width: 240px;
+            padding: 30px 36px;
+            .ft-hd-bgi {
+              width: 50px;
+              height: 50px;
+              background-image: url(../img/index/icons.png);
+            }
+            .ft-hd-desc {
+              margin-left: 8px;
+              h3 {
+                height: 28px;
+                line-height: 28px;
+                font-size: 14px;
+                color: $style-333;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+      .ft-bd {
+        height: 190px;
+        border-top: 1px solid $style-bg-ed;
+        border-bottom: 1px solid $style-bg-ed;
+        ul {
+          display: flex;
+          li {
+            display: flex;
+            width: 200px;
+            justify-content: center;
+            text-align: center;
+            padding-top: 20px;
+            &:last-child {
+              display: block;
+              color: $style-333;
+              h4 {
+                line-height: 24px;
+                margin-bottom: 5px;
+                font-size: 18px;
+              }
+              p {
+                margin-top: 10px;
+              }
+            }
+            dl {
+              text-align: left;
+              color: $style-333;
+              dt {
+                font-size: 18px;
+                line-height: 24px;
+                margin-bottom: 5px;
+              }
+              dd {
+                line-height: 20px;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+      .ft-bt {
+        padding-top: 20px;
+        ul {
+          display: flex;
+          justify-content: center;
+          li {
+            &:nth-child(even) {
+              width: 1px;
+              height: 12px;
+              margin: 0 14px;
+              background-color: #999;
+            }
+            a {
+              display: block;
+              font-size: 12px;
+              height: 12px;
+              line-height: 12px;
+            }
+          }
+        }
+        p {
+          width: 725px;
+          line-height: 24px;
+          margin: 15px auto;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
